@@ -1,0 +1,2 @@
+# renameWinScreenshot
+自动重命名Windows屏幕截图成创建时间
