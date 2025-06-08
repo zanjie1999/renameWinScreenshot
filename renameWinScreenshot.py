@@ -12,7 +12,8 @@ import os, datetime, sys
 startStr = sys.argv[1] if len(sys.argv) > 1 else '屏幕截图('
 
 s =  startStr.split('*')
-if len(startStr) == 2:
+endStr = ''
+if len(s) == 2:
     endStr = s[1]
 startStr = s[0]
 
@@ -20,7 +21,7 @@ listdir = os.listdir('.')
 
 names = {i:1 for i in listdir}
 for file_path in listdir:
-    if os.path.isfile(file_path) and (not startStr or file_path.startswith(startStr)) and (not endStr or file_path.endswith(endStr)):
+    if os.path.isfile(file_path) and (not startStr or file_path.startswith(startStr)) and (not endStr or file_path.endswith(endStr)) and file_path != 'renameWinScreenshot.exe' and file_path != 'renameWinScreenshot.py':
         # 获取文件的  ctime创建时间 修改时间mtime
         modified_time = os.path.getmtime(file_path)
         modified_time_obj = datetime.datetime.fromtimestamp(modified_time)
