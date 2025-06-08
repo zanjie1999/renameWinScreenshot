@@ -1,7 +1,7 @@
 # coding=utf-8
 
 # 将Windows的屏幕截图重命名成时间
-# v1.1 zyyme 20241029
+# v2 zyyme 20241029
 
 import os, datetime, sys
 
@@ -11,11 +11,16 @@ import os, datetime, sys
 # 可以用参数传入需要重命名的文件 * 则是全部
 startStr = sys.argv[1] if len(sys.argv) > 1 else '屏幕截图('
 
+s =  startStr.split('*')
+if len(startStr) == 2:
+    endStr = s[1]
+startStr = s[0]
+
 listdir = os.listdir('.')
 
 names = {i:1 for i in listdir}
 for file_path in listdir:
-    if os.path.isfile(file_path) and (startStr == '*' or file_path.startswith(startStr)):
+    if os.path.isfile(file_path) and (not startStr or file_path.startswith(startStr)) and (not endStr or file_path.endswith(endStr)):
         # 获取文件的  ctime创建时间 修改时间mtime
         modified_time = os.path.getmtime(file_path)
         modified_time_obj = datetime.datetime.fromtimestamp(modified_time)
